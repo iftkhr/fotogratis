@@ -4,7 +4,8 @@ import './index.css';
 
 // components
 
-import SearchBar from "./components/SearchBar/SearchBar";
+import SearchBar from './components/SearchBar/SearchBar';
+import Photos from './components/Photos/Photos';
 
 class App extends React.Component {
 	render() {
@@ -12,8 +13,12 @@ class App extends React.Component {
 			<div className="main">
 				<div className="logo">Fotogratis</div>
 				<div className="tagline">Free photos & videos.</div>
-				<div className="searchbar"><SearchBar/></div>
-				<div className="photos">Photos</div>
+				<div className="searchbar">
+					<SearchBar />
+				</div>
+				<div className="photos">
+					<Photos />
+				</div>
 			</div>
 		);
 	}
