@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/fotogratis/static/css/main.bb903bb9.css",
-    "main.js": "/fotogratis/static/js/main.eee7df82.js",
+    "main.css": "/fotogratis/static/css/main.59326969.css",
+    "main.js": "/fotogratis/static/js/main.ff09caef.js",
     "index.html": "/fotogratis/index.html",
-    "main.bb903bb9.css.map": "/fotogratis/static/css/main.bb903bb9.css.map",
-    "main.eee7df82.js.map": "/fotogratis/static/js/main.eee7df82.js.map"
+    "main.59326969.css.map": "/fotogratis/static/css/main.59326969.css.map",
+    "main.ff09caef.js.map": "/fotogratis/static/js/main.ff09caef.js.map"
   },
   "entrypoints": [
-    "static/css/main.bb903bb9.css",
-    "static/js/main.eee7df82.js"
+    "static/css/main.59326969.css",
+    "static/js/main.ff09caef.js"
   ]
 }
