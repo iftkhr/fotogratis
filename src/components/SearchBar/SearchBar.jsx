@@ -7,7 +7,7 @@ class SearchBar extends React.Component {
 			<div className="searchbar-container">
 				<input
 					type="text"
-					placeholder="search..."
+					placeholder="Search free photos & videos"
 					name="search"
 					className="searchbar-input"
 				/>
