@@ -1,0 +1,15 @@
+.photo-container {
+	cursor: pointer;
+	margin-bottom: -2%;
+}
+
+.photograph {
+	width: 100%;
+	filter: grayscale();
+	transition: transform;
+}
+
+.photograph:hover {
+	filter: none;
+	transform: scale(1);
+}

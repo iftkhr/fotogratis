@@ -1,11 +1,12 @@
 .searchbar-container {
 	display: grid;
-	grid-template-columns: auto auto;
+	grid-template-columns: 95% 5%;
 	align-items: center;
-	width: 300px;
-	box-shadow: 0px 0px 10px 0px #bbb;
+	width: 100%;
 	border-radius: 100px;
 	padding: 5px;
+	margin-top: 5px;
+	background: #fff;
 }
 
 .searchbar-input {
@@ -14,7 +15,8 @@
 	height: 30px;
 	color: rgb(129, 129, 129);
 	font-size: 1em;
-	width: 260px;
+	width: 100%;
+	font-weight: 600;
 }
 
 .searchbar-input:focus {
