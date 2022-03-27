@@ -5,11 +5,17 @@
 
 .photograph {
 	width: 100%;
-	filter: grayscale();
-	transition: transform;
+	height: 200px;
 }
 
-.photograph:hover {
-	filter: none;
-	transform: scale(1);
+@media all and (max-width: 800px) {
+	.photograph {
+		height: 175px;
+	}
+}
+
+@media all and (max-width: 600px) {
+	.photograph {
+		height: 150px;
+	}
 }

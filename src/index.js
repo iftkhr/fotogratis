@@ -5,7 +5,6 @@ import './index.css';
 // components
 
 import Photo from './components/Photo/Photo';
-import SearchBar from './components/SearchBar/SearchBar';
 
 class App extends React.Component {
 	constructor() {
@@ -14,12 +13,45 @@ class App extends React.Component {
 			error: null,
 			isLoaded: false,
 			photos: [],
-			newUrl: `https://api.pexels.com/v1/curated?page=${new Date().getHours()}&per_page=80`,
+			pexels: [],
+			pixabay: [],
+			query: null,
 		};
 	}
 
+	onEnter = (event) => {
+		if (event.keyCode == 13) {
+			this.setState({
+				query: document.getElementById('search').value,
+			});
+			setInterval(() => {
+				this.componentDidMount();
+			}, 1000);
+		}
+	};
+
+	onClick = () => {
+		this.setState({
+			query: document.getElementById('search').value,
+		});
+		setInterval(() => {
+			this.componentDidMount();
+		}, 1000);
+	};
+
 	componentDidMount() {
-		fetch(this.state.newUrl, {
+		let pexelsUrl;
+		let pixabayUrl;
+		if (this.state.query !== '' && this.state.query !== null) {
+			pexelsUrl = `https://api.pexels.com/v1/search?query=${this.state.query}&per_page=50`;
+			pixabayUrl = `https://pixabay.com/api/?key=26319575-80adeb24f754dd7d1c530e6b4&q=${this.state.query}&orientation=horizontal&per_page=100`;
+		} else {
+			pexelsUrl = `https://api.pexels.com/v1/curated?page=${new Date().getHours()}&per_page=50`;
+			pixabayUrl = `https://pixabay.com/api/?key=26319575-80adeb24f754dd7d1c530e6b4&page=${
+				new Date().getDay() + 1
+			}&orientation=horizontal&per_page=100`;
+		}
+		fetch(pexelsUrl, {
 			method: 'GET',
 			headers: {
 				Accept: 'application/json',
@@ -32,7 +64,7 @@ class App extends React.Component {
 				(result) => {
 					this.setState({
 						isLoaded: true,
-						photos: result.photos,
+						pexels: result.photos,
 					});
 				},
 				(error) => {
@@ -42,6 +74,32 @@ class App extends React.Component {
 					});
 				}
 			);
+		fetch(pixabayUrl, {
+			method: 'GET',
+			headers: {
+				Accept: 'application/json',
+			},
+		})
+			.then((res) => res.json())
+			.then(
+				(result) => {
+					this.setState({
+						isLoaded: true,
+						pixabay: result.hits,
+					});
+				},
+				(error) => {
+					this.setState({
+						isLoaded: true,
+						error,
+					});
+				}
+			);
+		setTimeout(() => {
+			this.setState({
+				photos: this.state.pexels.concat(this.state.pixabay),
+			});
+		}, 1000);
 	}
 
 	render() {
@@ -49,13 +107,28 @@ class App extends React.Component {
 			<div className="main">
 				<div className="logo">Fotogratis</div>
 				<div className="searchbar">
-					<SearchBar />
+					<div className="searchbar-container">
+						<input
+							type="text"
+							placeholder="Search free photos"
+							name="search"
+							className="searchbar-input"
+							id="search"
+							onKeyUp={this.onEnter}
+						/>
+						<img
+							className="searchbar-icon"
+							src="search-icon.svg"
+							alt="search-icon"
+							onClick={this.onClick}
+						/>
+					</div>
 				</div>
 				<div className="photos">
 					{this.state.photos.map((photo) => (
 						<div className="photo" key={photo.id}>
 							<Photo
-								source={photo.src.landscape}
+								source={photo}
 								error={this.state.error}
 								load={this.state.isLoaded}
 							/>
@@ -63,7 +136,8 @@ class App extends React.Component {
 					))}
 				</div>
 				<div className="footer">
-					Made by <a href="https://iftkhr.me">iftkhr</a>{' '}
+					Made by <a href="https://iftkhr.me">iftkhr</a> & sourced
+					from <a href="">Pexels</a> and <a href="">Pixabay</a>
 				</div>
 			</div>
 		);
